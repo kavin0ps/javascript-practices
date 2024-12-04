@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    <div id="container">
+    <input id="input" type="text">
+    <button id="btn" onclick="addli()">ADD</button>
+    <div id="ul">
+       
+    </div>
+    </div>
+    <script>
+      var count=0 
+    function addli(){
+        var input = document.getElementById("input");
+        var ul=document.getElementById("ul");
+        var li = document.createElement("h1");
+        var c=countt()
+        li.innerHTML= c+":-     "+input.value+"<button onclick='deletei(event)' id='btn2'>delete</button>";
+        ul.append(li);
+        }
+        function countt(){
+            count++;
+            return count;
+        }
+        function deletei(event){
+            event.target.parentElement.remove();
+            count--
+        }
+
+    </script>
+</body>
+</html>

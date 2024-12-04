@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bookkk.css">
+</head>
+<body>
+    
+<h1>book</h1><button class="addpop" onclick="addpopup()" href="#">add</button>
+<div class="books"></div>
+<div class="overlay">
+    <div class="book-desc">
+        <input type="text" id="booktittle" placeholder="tittle">
+        <input type="text" id="bookauthor" placeholder="author">
+        <input type="text" id="bookdesc" placeholder="description" >
+        <button class="addbook" >add Book</button>
+    </div>
+</div>
+
+<script>
+    var overlay=document.querySelector(".overlay");
+    var addbook=document.querySelector(".addbook");
+    function addpopup(){
+        overlay.style.display="block";
+    }
+    addbook.addEventListener("click",function(event){
+        def(event);
+        overlay.style.display="none";
+        var booktittle=document.getElementById("#booktittle");
+        var bookauthor=document.getElementById("#bookauthor").value;
+        var bookdesc=document.getElementById("#bookdesc").value;
+        var bookdoc=document.createElement("div"); 
+
+        bookdoc.classlist.add("book-container");
+        bookdoc.innerHTML=`<h3>${(booktittle).value}</h3>
+    <h4>${bookauthor}</h4>
+    <p>${bookdesc}</p>`
+
+         } )
+         function def(event)
+         {
+           event.preventDefault();
+         }
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            max-width: 500px;
+            max-height: 500px;
+            background-color: black;
+        }
+        #btn {
+            color: rgb(0, 0, 0);
+            background-color: rgb(255, 255, 255);
+            border: 40px solid black;
+            border-radius: 13%;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 40px;
+            transform: translate(-50%,-50%);
+            font-weight: 800;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: border 0.3s ease;
+        }
+    </style>
+</head>
+<body id="body">
+    <button id="btn">click me</button>
+    <script>
+        document.getElementById('btn').addEventListener('mouseenter', function() {
+            var r = Math.floor((Math.random() * 700));
+            this.style.margin = r + 'px';
+        });
+
+        document.getElementById('btn').addEventListener('click', function() {
+            btn.textContent = "you won";
+            btn.style.backgroundColor = "white";
+            bg();
+        });
+
+        function bg() {
+            var body = document.getElementById('body');
+            body.style.backgroundImage = "url('https://media2.giphy.com/media/5T06ftQWtCMy0XFaaI/200.gif?cid=790b76116sdbr762ndnq56g7iaq7wv8lqx6ajbror93qk678&rid=200.gif&ct=g')";
+            body.style.backgroundSize = "cover"; // Makes the image cover the entire background
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bluetooth Proximity Detection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #000000;
+      margin: 0;
+
+      padding: 20px;
+    }
+    h1 {
+      color: #000000;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 10px;
+      background: #ffffff;
+      border-radius: 5px;
+      display: inline-block;
+      min-width: 300px;
+    }
+    button {   background-color: #000000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+   
+    }
+    .con{
+        width: 300px;
+      margin:220px auto;
+      padding: 20px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+    <div class="con">
+  <h1>Bluetooth Proximity Detection</h1>
+  <button id="connectBtn">Connect to Device</button>
+  <div id="output">Output will appear here...</div></div>
+
+
+  <script>
+    const connectBtn = document.getElementById('connectBtn');
+    const outputDiv = document.getElementById('output');
+
+    connectBtn.addEventListener('click', async () => {
+      try {
+        // Request a Bluetooth device
+        const device = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: ['0000abcd-0000-1000-8000-00805f9b34fb'] // Replace with your service UUID
+        });
+
+        outputDiv.textContent = `Connected to device: ${device.name}`;
+
+        // Connect to the GATT server of the device
+        const server = await device.gatt.connect();
+
+        // Access the custom service (replace with your actual UUID)
+        const service = await server.getPrimaryService('0000abcd-0000-1000-8000-00805f9b34fb');
+
+        // Access a characteristic within that service (replace with your actual UUID)
+        const characteristic = await service.getCharacteristic('0000abcd-0000-1000-8000-00805f9b34fc'); // Example characteristic UUID
+
+        // Read the value of the characteristic
+        const value = await characteristic.readValue();
+
+        // Assuming the value is an 8-bit integer (adjust as necessary based on your device)
+        const proximity = value.getUint8(0);
+
+        // Display the proximity value (or other data)
+        outputDiv.textContent += `\nProximity Value: ${proximity}`;
+      } catch (error) {
+        outputDiv.textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+
+</body>
+</html>
